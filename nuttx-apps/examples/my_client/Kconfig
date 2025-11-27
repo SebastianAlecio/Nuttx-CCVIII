@@ -1,0 +1,36 @@
+#
+# apps/examples/my_client/Kconfig
+#
+
+config EXAMPLES_MY_CLIENT
+	bool "My Network Client Example"
+	default n
+	# Depende de que el soporte de red (NET) y el soporte de sockets TCP (NET_TCP) estén activos.
+	depends on NET_TCP 
+	---help---
+		Enable the my_client application to test TCP/UDP connectivity.
+
+if EXAMPLES_MY_CLIENT
+
+# Tamaño de pila del programa
+config EXAMPLES_MY_CLIENT_STACKSIZE
+	int "my_client stack size"
+	default DEFAULT_TASK_STACKSIZE
+	---help---
+		Stack size of the "my_client" command.
+
+# Opciones de conectividad directa
+
+config EXAMPLES_MY_CLIENT_TARGET_IP
+	hex "Target Server IP address"
+	default 0x7f000001  # ip 127.0.0.1 
+	---help---
+		The IP address of the server that the client will connect to.
+
+config EXAMPLES_MY_CLIENT_PORT
+	int "Target Server Port number"
+	default 3000  # puerto 3000
+	---help---
+		The port number of the server that the client will connect to.
+
+endif

@@ -1,0 +1,43 @@
+#
+# Kconfig para el cliente de Raw Sockets (my_client_raw)
+#
+
+config EXAMPLES_MY_CLIENT_RAW
+	tristate "Encabezados UDP/IP LAB7"
+	default n
+	# depends on NET_IPv4 && NET_RAW && NET_UDP && NET_ICMP
+	---help---
+		Activa el ejemplo 'my_client_raw'.
+		Este cliente construye manualmente los encabezados IP y UDP
+		para comunicarse con 'my_server'.
+
+		Necesita:
+		- NET_IPv4: Soporte para IPv4.
+		- NET_RAW: Soporte para Raw Sockets.
+		- NET_UDP: Para el protocolo y para que el kernel calcule el checksum.
+		- NET_ICMP: Para que el socket raw pueda recibir errores.
+
+if EXAMPLES_MY_CLIENT_RAW
+
+config EXAMPLES_MY_CLIENT_RAW_STACKSIZE
+	int "Tamaño del Stack para my_client_raw"
+	default 2048
+	---help---
+		Los sockets raw y el parseo de paquetes usan más stack.
+
+config EXAMPLES_MY_CLIENT_RAW_TARGET_IP
+	string "IP por defecto del Servidor"
+	default "127.0.0.1"
+	---help---
+		La dirección IP por defecto a la que se conectará el cliente raw.
+		Usa 127.0.0.1 para pruebas locales (loopback).
+
+config EXAMPLES_MY_CLIENT_RAW_PORT
+	int "Puerto por defecto del Servidor"
+	default 3000
+	---help---
+		El puerto por defecto al que se conectará el cliente raw.
+		Debe coincidir con el puerto de 'my_server'.
+
+endif
+

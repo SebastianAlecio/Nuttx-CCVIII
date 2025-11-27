@@ -1,0 +1,20 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config EXAMPLES_RAWCLIENT
+	tristate "Raw UDP socket client"
+	default n
+	#depends on NET_RAW
+	---help---
+		Enable the raw UDP socket client example.
+
+config EXAMPLES_RAWCLIENT_STACKSIZE
+	int "raw_client stack size"
+	default 2048
+	#depends on EXAMPLES_RAWCLIENT
+	---help---
+		Stack size for the "raw_client" command.
+		The default of 2048 should be sufficient as it
+		does not use deep recursion or large stack variables.

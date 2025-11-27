@@ -1,0 +1,9 @@
+############################################################################
+# apps/examples/my_client/Make.defs
+############################################################################
+
+ifneq ($(CONFIG_EXAMPLES_MY_CLIENT),)
+
+  CONFIGURED_APPS += $(APPDIR)/examples/my_client
+
+endif

@@ -1,0 +1,33 @@
+#
+# Para una descripción de la sintaxis de este archivo de configuración,
+# vea el archivo kconfig-language.txt en el repositorio de herramientas de NuttX.
+#
+
+config EXAMPLES_MY_SERVER
+	tristate "My server lab1"
+	default n
+	# Depende de que la red (NET) y ambos protocolos (TCP y UDP) estén habilitados
+	depends on NET && NET_TCP && NET_UDP
+	---help---
+		Habilita el ejemplo del servidor (my_server).
+		Este servidor puede operar en modo TCP o UDP.
+
+if EXAMPLES_MY_SERVER
+
+config EXAMPLES_MY_SERVER_STACKSIZE
+	int "Tamaño del stack para my_server"
+	default DEFAULT_TASK_STACKSIZE
+	---help---
+		Tamaño del stack para el comando "my_server".
+		Si se usa en un entorno de red muy ocupado, podría necesitar
+		aumentar este valor (ej. 4096).
+
+config EXAMPLES_MY_SERVER_PORT
+	int "Puerto por defecto del servidor"
+	default 3000
+	---help---
+		El puerto en el que el servidor escuchará por defecto.
+		Esto puede ser sobreescrito por el argumento "port" en NSH.
+
+endif
+
